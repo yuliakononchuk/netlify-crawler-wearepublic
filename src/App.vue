@@ -6,22 +6,17 @@
 </template>
 
 <script>
-import axios from "axios";
 import Header from "./components/Header";
 import EventGrid from "./components/EventGrid.vue";
 import { parseData } from "./helpers";
+import data from "../data.json";
 
 export default {
   name: "app",
   data: function() {
     return {
-      data: []
+      data: data.data
     };
-  },
-  mounted: function() {
-    axios.get("/data").then(response => {
-      this.data = response.data.data;
-    });
   },
   computed: {
     events: function() {

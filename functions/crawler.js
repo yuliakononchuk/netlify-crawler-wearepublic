@@ -3,6 +3,18 @@ const chrome = require('chrome-aws-lambda');
 const puppeteer = require('puppeteer-core');
 const fs = require('fs');
 
+exports.handler = async (event, context) => {
+  await getEvents();
+  return {
+    statusCode: 200,
+    body: JSON.stringify({
+      message: "Fetching completed!",
+      buffer: screenshot
+    })
+  }
+}
+
+
 const getEvents = async () => {
   console.warn('path: ', chrome.executablePath, 'headless: ', chrome.headless);
 
@@ -10,7 +22,7 @@ const getEvents = async () => {
     args: chrome.args,
     executablePath: await chrome.executablePath,
     headless: chrome.headless,
-});
+  });
 
   const page = await browser.newPage()
   try {
@@ -56,9 +68,9 @@ const getEvents = async () => {
     const page = await browser.newPage()
     page.setDefaultTimeout(0)
     try {
-        await page.goto(url)
+      await page.goto(url)
     } catch (e) {
-        console.log('GO TO Error - Event pages:', e);
+      console.log('GO TO Error - Event pages:', e);
     }
     const data = await page.evaluate(url => ({
       url: url,
@@ -71,5 +83,3 @@ const getEvents = async () => {
     return data;
   }
 };
-
-getEvents();
