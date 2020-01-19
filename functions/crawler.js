@@ -23,10 +23,12 @@ const getEvents = async () => {
     executablePath: await chrome.executablePath,
     headless: chrome.headless,
   });
+  console.warn('browser started')
 
   const page = await browser.newPage()
   try {
     await page.goto('https://www.wearepublic.nl/programma/?region=amsterdam-stad&region=haarlem&region=noord-holland&region=den-haag&region=delft&region=leiden&region=zuid-holland&genre=false&search=')
+    console.warn('goto succeded')
   } catch (e) {
     console.log('GO TO Error:', e);
   }
