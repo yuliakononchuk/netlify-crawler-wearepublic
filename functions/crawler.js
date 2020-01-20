@@ -1,9 +1,9 @@
 
 const chrome = require('chrome-aws-lambda');
-const puppeteer = require('puppeteer-core');
 const fs = require('fs');
 
 exports.handler = async (event, context) => {
+  
   await getEvents();
   return {
     statusCode: 200,
@@ -16,12 +16,15 @@ exports.handler = async (event, context) => {
 
 
 const getEvents = async () => {
-  console.warn('path: ', chrome.executablePath, 'headless: ', chrome.headless);
+  console.warn('headless: ', chrome.headless);
+  const executablePath = chrome.headless ? await chrome.executablePath : "./node_modules/puppeteer/.local-chromium/win64-706915/chrome-win/chrome.exe"
+  console.warn("executablePath", executablePath)
 
-  const browser = await puppeteer.launch({
+  const browser = await chrome.puppeteer.launch({
     args: chrome.args,
-    executablePath: await chrome.executablePath,
-    headless: chrome.headless,
+    executablePath,
+    defaultViewport: chrome.defaultViewport,
+    headless: chrome.headless
   });
   console.warn('browser started')
 

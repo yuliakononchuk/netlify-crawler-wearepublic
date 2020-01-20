@@ -6,7 +6,6 @@
   },
   "private": true,
   "scripts": {
-    "start": "nodemon server",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "serve:lambda": "netlify-lambda serve ./functions",
@@ -32,6 +31,7 @@
     "babel-eslint": "^10.0.3",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
+    "puppeteer": "^2.0.0",
     "vue-template-compiler": "^2.6.10"
   },
   "eslintConfig": {
