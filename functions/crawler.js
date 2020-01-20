@@ -40,6 +40,8 @@ const getEvents = async () => {
   let currentLastElement = await page.evaluate(getLastElement);
 
   while (currentLastElement !== prevLastElement) {
+    console.warn('currentLastElement', currentLastElement, 'prevLastElement', prevLastElement )
+
     await page.evaluate(scrollPageDown);
     await page.waitFor(5000);
     prevLastElement = currentLastElement;
@@ -50,6 +52,7 @@ const getEvents = async () => {
     const headers = document.querySelectorAll('.event-item__header .event-item__date');
     return Array.from(headers).map(item => item.getAttribute("href"))
   })
+  console.warn('links', links)
 
   const eventsData = await Promise.all(links.map(async link => {
     return await getData(link)
