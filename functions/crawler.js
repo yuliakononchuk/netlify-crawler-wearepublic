@@ -35,10 +35,12 @@ const getEvents = async () => {
   } catch (e) {
     console.log('GO TO Error:', e);
   }
+  console.warn('started waitFor')
   await page.waitFor(5000);
+  console.warn('ended waitFor')
   let prevLastElement = null;
   let currentLastElement = await page.evaluate(getLastElement);
-
+  console.warn('currentLastElement', currentLastElement)
   while (currentLastElement !== prevLastElement) {
     console.warn('currentLastElement', currentLastElement, 'prevLastElement', prevLastElement )
 
