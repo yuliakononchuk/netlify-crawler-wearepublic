@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <Header msg="Finally a digestible list of WeArePublic events!" />
-    <EventGrid v-bind:events="events" />
+      <Header msg="Finally a digestible list of WeArePublic events!" />
+      <EventGrid v-bind:events="events" />
   </div>
 </template>
 
